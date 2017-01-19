@@ -62,6 +62,7 @@ class Fluent::SimpleLogentriesOutput < Fluent::BufferedOutput
   end
 
   def send_logentries(tag, record)
+    retries = 0
     data = if @append_tag
              record.merge({tag: tag})
            else
